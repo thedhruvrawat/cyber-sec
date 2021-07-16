@@ -42,14 +42,14 @@ def main():
         exit(0)
 
 def scanAll():
-    start = 11
-    end = 20
-    mainScanner(start, end)
+    start = 1
+    end = 1024
+    mainScanner(start, end+1)
 
 def scanCommon():
     start = 1
-    end = 10
-    mainScanner(start, end)
+    end = 65535
+    mainScanner(start, end+1)
 
 def scanSpecific(port):
     scan = nmap.PortScanner()
