@@ -13,22 +13,32 @@ def main():
             )
     parser.add_option(
             '-a', '--all', action="store_true", dest='all',
-            help = "Scan all ports (1-65536)", default=None
+            help = "Scan all ports (1-65535)", default=None
             )
     parser.add_option(
             '-s', '--specific', action="store", type="int", dest='spec',
             help = "Scan specific ports", default=None
             )
+    parser.add_option(
+            '-r', '--range', action="store", nargs=2, type="int", dest='range',
+            help = "Scan ports in a specific range", default=None
+            )
     (options, args) = parser.parse_args()
     if (options.com != None):
-        scanAll()
+        print(f"Scanning common ports from 1 to 1024.")
+        scanCommon()
         exit(0)
     if (options.all != None):
-        scanCommon()
+        print(f"Scanning all ports from 1 to 65535.")
+        scanAll()
         exit(0)
     if (options.spec != None):
         print(f"Scanning port {options.spec}...")
         scanSpecific(options.spec)
+        exit(0)
+    if (options.range[0] != None):
+        print(f"Scanning ports from Port #{options.range[0]} to Port #{options.range[1]}.")
+        scanRange(options.range[0], options.range[1])
         exit(0)
 
 def scanAll():
@@ -46,6 +56,9 @@ def scanSpecific(port):
     check = scan.scan(ip, str(port))
     check = check['scan'][ip]['tcp'][port]['state']
     print(f"Port #{port} is {check}.")
+
+def scanRange(beg, fin):
+    mainScanner(beg, fin+1)
 
 def mainScanner(start, end):
     #Initializing a PortScanner object
