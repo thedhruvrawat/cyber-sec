@@ -2,7 +2,7 @@
 
 A command-line based custom port-scanning tool built using [python-nmap](https://pypi.org/project/python-nmap/)
 
-## Table of content
+## Table of Contents
 
 - [Installation](#installation)
 - [Documentation](#documentation)
@@ -19,7 +19,7 @@ $ pip install python-nmap
 
 ## Documentation
 
-```bash
+```
 $ python portScanner.py -h
 Usage: portScanner.py [options]
 
